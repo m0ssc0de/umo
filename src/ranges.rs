@@ -2,7 +2,7 @@ use chrono::{Datelike, Duration, TimeZone};
 use chrono_tz::US::Eastern;
 
 #[cfg(feature = "until_2025")]
-pub fn get_open_ranges() -> Vec<(u64, u64)> {
+pub fn get_open_ranges() -> Vec<(i64, i64)> {
     // 2025
     // Holiday	Date	Market Status
     // New Year's Day	January 1	Closed
@@ -47,7 +47,17 @@ pub fn get_open_ranges() -> Vec<(u64, u64)> {
 
     while current_date <= end_date {
         if current_date.weekday().number_from_monday() <= 5 {
-            if !closed_vec.contains(&current_date) {
+            let mut is_closed = false;
+            for closed in closed_vec.iter() {
+                if (closed.year() == current_date.year())
+                    && (closed.month() == current_date.month())
+                    && (closed.day() == current_date.day())
+                {
+                    is_closed = true;
+                    break;
+                }
+            }
+            if !is_closed {
                 let start = Eastern
                     .with_ymd_and_hms(
                         current_date.year(),
@@ -91,10 +101,7 @@ pub fn get_open_ranges() -> Vec<(u64, u64)> {
                         )
                         .unwrap()
                 };
-                open_ranges.push((
-                    start.timestamp_millis() as u64,
-                    end.timestamp_millis() as u64,
-                ));
+                open_ranges.push((start.timestamp_millis(), end.timestamp_millis()));
             }
         }
         current_date += Duration::days(1);

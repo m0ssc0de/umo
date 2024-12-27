@@ -1,4 +1,4 @@
-pub fn pick_open_range(timestamp_millis: u64, open_ranges: &[(u64, u64)]) -> Option<(u64, u64)> {
+pub fn pick_open_range(timestamp_millis: i64, open_ranges: &[(i64, i64)]) -> Option<(i64, i64)> {
     for i in 1..open_ranges.len() {
         let (start0, end0) = open_ranges[i - 1];
         let (start1, end1) = open_ranges[i];
