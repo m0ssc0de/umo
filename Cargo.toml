@@ -1,10 +1,11 @@
 [package]
 name = "umo"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 repository = "https://github.com/m0ssc0de/umo"
 license = "MIT"
 description = "All open time ranges of US stock market"
+readme = "Readme.md"
 
 [dependencies]
 chrono = "0.4.39"
