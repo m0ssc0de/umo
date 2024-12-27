@@ -1,0 +1,12 @@
+[package]
+name = "umo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4.39"
+chrono-tz = "0.10.0"
+
+[features]
+default = ["until_2025"]
+until_2025 = []
