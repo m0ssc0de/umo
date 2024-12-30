@@ -13,10 +13,10 @@ Add the following to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-umo = { version = "0.1.0", features = ["until_2025"] }
+umo = { version = "0.1.3", features = ["2023", "2024", "2025] }
 ```
 
-Or `cargo add umo -F until_2025`
+Or `cargo add umo -F full`
 
 ## Example
 

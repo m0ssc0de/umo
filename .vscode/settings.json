@@ -1,5 +1,6 @@
 {
     "rust-analyzer.cargo.features": [
-        "until_2025"
+        "2024",
+        "2025"
     ]
 }
