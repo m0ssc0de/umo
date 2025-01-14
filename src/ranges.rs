@@ -1,20 +1,169 @@
+use std::vec;
+
+use chrono::DateTime;
 use chrono::{Datelike, Duration, TimeZone};
+use chrono_tz::Tz;
 use chrono_tz::US::Eastern;
 
 pub fn get_open_ranges() -> Vec<(i64, i64)> {
     let mut open_ranges = vec![];
 
-    #[cfg(feature = "2023")]
+    open_ranges.append(&mut open_ranges_2016());
+    open_ranges.append(&mut open_ranges_2017());
+    open_ranges.append(&mut open_ranges_2018());
+    open_ranges.append(&mut open_ranges_2019());
+    open_ranges.append(&mut open_ranges_2020());
+    open_ranges.append(&mut open_ranges_2021());
+    open_ranges.append(&mut open_ranges_2022());
     open_ranges.append(&mut open_ranges_2023());
-    #[cfg(feature = "2024")]
     open_ranges.append(&mut open_ranges_2024());
-    #[cfg(feature = "2025")]
     open_ranges.append(&mut open_ranges_2025());
 
     open_ranges
 }
 
-#[cfg(feature = "2023")]
+pub fn open_ranges_2016() -> Vec<(i64, i64)> {
+    let closed_vec = vec![
+        Eastern.with_ymd_and_hms(2016, 1, 1, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2016, 1, 18, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2016, 2, 15, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2016, 3, 25, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2016, 5, 30, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2016, 7, 4, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2016, 9, 5, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2016, 11, 24, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2016, 12, 26, 0, 0, 0).unwrap(),
+    ];
+    let early_close_vec = vec![Eastern.with_ymd_and_hms(2016, 11, 25, 0, 0, 0).unwrap()];
+    let start_date = Eastern.with_ymd_and_hms(2016, 1, 1, 0, 0, 0).unwrap();
+    let end_date = Eastern.with_ymd_and_hms(2016, 12, 31, 0, 0, 0).unwrap();
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
+}
+
+pub fn open_ranges_2017() -> Vec<(i64, i64)> {
+    let closed_vec = vec![
+        Eastern.with_ymd_and_hms(2017, 1, 2, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2017, 1, 16, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2017, 2, 20, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2017, 4, 14, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2017, 5, 29, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2017, 7, 4, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2017, 9, 4, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2017, 11, 23, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2017, 12, 25, 0, 0, 0).unwrap(),
+    ];
+    let early_close_vec = vec![
+        Eastern.with_ymd_and_hms(2017, 7, 3, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2017, 11, 24, 0, 0, 0).unwrap(),
+    ];
+    let start_date = Eastern.with_ymd_and_hms(2017, 1, 1, 0, 0, 0).unwrap();
+    let end_date = Eastern.with_ymd_and_hms(2017, 12, 31, 0, 0, 0).unwrap();
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
+}
+
+pub fn open_ranges_2018() -> Vec<(i64, i64)> {
+    let closed_vec = vec![
+        Eastern.with_ymd_and_hms(2018, 1, 1, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2018, 1, 15, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2018, 2, 19, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2018, 3, 30, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2018, 5, 28, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2018, 7, 4, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2018, 9, 3, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2018, 11, 22, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2018, 12, 25, 0, 0, 0).unwrap(),
+    ];
+    let early_close_vec = vec![
+        Eastern.with_ymd_and_hms(2018, 7, 3, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2018, 11, 23, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2018, 12, 24, 0, 0, 0).unwrap(),
+    ];
+    let start_date = Eastern.with_ymd_and_hms(2018, 1, 1, 0, 0, 0).unwrap();
+    let end_date = Eastern.with_ymd_and_hms(2018, 12, 31, 0, 0, 0).unwrap();
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
+}
+
+pub fn open_ranges_2019() -> Vec<(i64, i64)> {
+    let closed_vec = vec![
+        Eastern.with_ymd_and_hms(2019, 1, 1, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2019, 1, 21, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2019, 2, 18, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2019, 4, 19, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2019, 5, 27, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2019, 7, 4, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2019, 9, 2, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2019, 11, 28, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2019, 12, 25, 0, 0, 0).unwrap(),
+    ];
+    let early_close_vec = vec![
+        Eastern.with_ymd_and_hms(2019, 7, 3, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2019, 11, 29, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2019, 12, 24, 0, 0, 0).unwrap(),
+    ];
+    let start_date = Eastern.with_ymd_and_hms(2019, 1, 1, 0, 0, 0).unwrap();
+    let end_date = Eastern.with_ymd_and_hms(2019, 12, 31, 0, 0, 0).unwrap();
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
+}
+
+pub fn open_ranges_2020() -> Vec<(i64, i64)> {
+    let closed_vec = vec![
+        Eastern.with_ymd_and_hms(2020, 1, 1, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2020, 1, 20, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2020, 2, 17, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2020, 4, 10, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2020, 5, 25, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2020, 7, 3, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2020, 9, 7, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2020, 11, 26, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2020, 12, 25, 0, 0, 0).unwrap(),
+    ];
+    let early_close_vec = vec![
+        Eastern.with_ymd_and_hms(2020, 11, 27, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2020, 12, 24, 0, 0, 0).unwrap(),
+    ];
+    let start_date = Eastern.with_ymd_and_hms(2020, 1, 1, 0, 0, 0).unwrap();
+    let end_date = Eastern.with_ymd_and_hms(2020, 12, 31, 0, 0, 0).unwrap();
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
+}
+
+pub fn open_ranges_2021() -> Vec<(i64, i64)> {
+    let closed_vec = vec![
+        Eastern.with_ymd_and_hms(2021, 1, 1, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2021, 1, 18, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2021, 2, 15, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2021, 4, 2, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2021, 5, 31, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2021, 7, 5, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2021, 9, 6, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2021, 11, 25, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2021, 12, 24, 0, 0, 0).unwrap(),
+    ];
+    let early_close_vec = vec![Eastern.with_ymd_and_hms(2021, 11, 26, 0, 0, 0).unwrap()];
+    let start_date = Eastern.with_ymd_and_hms(2021, 1, 1, 0, 0, 0).unwrap();
+    let end_date = Eastern.with_ymd_and_hms(2021, 12, 31, 0, 0, 0).unwrap();
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
+}
+
+pub fn open_ranges_2022() -> Vec<(i64, i64)> {
+    let closed_vec = vec![
+        Eastern.with_ymd_and_hms(2022, 1, 17, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2022, 2, 21, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2022, 4, 15, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2022, 5, 30, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2022, 6, 20, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2022, 7, 4, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2022, 9, 5, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2022, 11, 24, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2022, 12, 26, 0, 0, 0).unwrap(),
+    ];
+    let early_close_vec = vec![Eastern.with_ymd_and_hms(2022, 11, 25, 0, 0, 0).unwrap()];
+    let start_date = Eastern.with_ymd_and_hms(2022, 1, 1, 0, 0, 0).unwrap();
+    let end_date = Eastern.with_ymd_and_hms(2022, 12, 31, 0, 0, 0).unwrap();
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
+}
+
+// test ranges::open_ranges_2022
+
 pub fn open_ranges_2023() -> Vec<(i64, i64)> {
     // 2023
     // Holiday 2023 Status
@@ -50,74 +199,9 @@ pub fn open_ranges_2023() -> Vec<(i64, i64)> {
 
     let start_date = Eastern.with_ymd_and_hms(2023, 1, 1, 0, 0, 0).unwrap();
     let end_date = Eastern.with_ymd_and_hms(2023, 12, 31, 0, 0, 0).unwrap();
-    let mut current_date = start_date;
-
-    let mut open_ranges = vec![];
-    while current_date <= end_date {
-        if current_date.weekday().number_from_monday() <= 5 {
-            let mut is_closed = false;
-            for closed in closed_vec.iter() {
-                if (closed.year() == current_date.year())
-                    && (closed.month() == current_date.month())
-                    && (closed.day() == current_date.day())
-                {
-                    is_closed = true;
-                    break;
-                }
-            }
-            if !is_closed {
-                let start = Eastern
-                    .with_ymd_and_hms(
-                        current_date.year(),
-                        current_date.month(),
-                        current_date.day(),
-                        9,
-                        30,
-                        0,
-                    )
-                    .unwrap();
-                let mut is_early_close = false;
-                for early_close in early_close_vec.iter() {
-                    if (early_close.year() == current_date.year())
-                        && (early_close.month() == current_date.month())
-                        && (early_close.day() == current_date.day())
-                    {
-                        is_early_close = true;
-                        break;
-                    }
-                }
-                let end = if is_early_close {
-                    Eastern
-                        .with_ymd_and_hms(
-                            current_date.year(),
-                            current_date.month(),
-                            current_date.day(),
-                            13,
-                            0,
-                            0,
-                        )
-                        .unwrap()
-                } else {
-                    Eastern
-                        .with_ymd_and_hms(
-                            current_date.year(),
-                            current_date.month(),
-                            current_date.day(),
-                            16,
-                            0,
-                            0,
-                        )
-                        .unwrap()
-                };
-                open_ranges.push((start.timestamp_millis(), end.timestamp_millis()));
-            }
-        }
-        current_date += Duration::days(1);
-    }
-    open_ranges
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
 }
 
-#[cfg(feature = "2024")]
 pub fn open_ranges_2024() -> Vec<(i64, i64)> {
     // 2024
     // Holiday 2024 Status
@@ -155,74 +239,9 @@ pub fn open_ranges_2024() -> Vec<(i64, i64)> {
 
     let start_date = Eastern.with_ymd_and_hms(2024, 1, 1, 0, 0, 0).unwrap();
     let end_date = Eastern.with_ymd_and_hms(2024, 12, 31, 0, 0, 0).unwrap();
-    let mut current_date = start_date;
-
-    let mut open_ranges = vec![];
-    while current_date <= end_date {
-        if current_date.weekday().number_from_monday() <= 5 {
-            let mut is_closed = false;
-            for closed in closed_vec.iter() {
-                if (closed.year() == current_date.year())
-                    && (closed.month() == current_date.month())
-                    && (closed.day() == current_date.day())
-                {
-                    is_closed = true;
-                    break;
-                }
-            }
-            if !is_closed {
-                let start = Eastern
-                    .with_ymd_and_hms(
-                        current_date.year(),
-                        current_date.month(),
-                        current_date.day(),
-                        9,
-                        30,
-                        0,
-                    )
-                    .unwrap();
-                let mut is_early_close = false;
-                for early_close in early_close_vec.iter() {
-                    if (early_close.year() == current_date.year())
-                        && (early_close.month() == current_date.month())
-                        && (early_close.day() == current_date.day())
-                    {
-                        is_early_close = true;
-                        break;
-                    }
-                }
-                let end = if is_early_close {
-                    Eastern
-                        .with_ymd_and_hms(
-                            current_date.year(),
-                            current_date.month(),
-                            current_date.day(),
-                            13,
-                            0,
-                            0,
-                        )
-                        .unwrap()
-                } else {
-                    Eastern
-                        .with_ymd_and_hms(
-                            current_date.year(),
-                            current_date.month(),
-                            current_date.day(),
-                            16,
-                            0,
-                            0,
-                        )
-                        .unwrap()
-                };
-                open_ranges.push((start.timestamp_millis(), end.timestamp_millis()));
-            }
-        }
-        current_date += Duration::days(1);
-    }
-    open_ranges
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
 }
 
-#[cfg(feature = "2025")]
 pub fn open_ranges_2025() -> Vec<(i64, i64)> {
     // 2025
     // Holiday	Date	Market Status
@@ -262,6 +281,15 @@ pub fn open_ranges_2025() -> Vec<(i64, i64)> {
     // Iterate over all workdays of 2025
     let start_date = Eastern.with_ymd_and_hms(2025, 1, 1, 0, 0, 0).unwrap();
     let end_date = Eastern.with_ymd_and_hms(2025, 12, 31, 0, 0, 0).unwrap();
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
+}
+
+fn open_ranges(
+    start_date: DateTime<Tz>,
+    end_date: DateTime<Tz>,
+    closed_vec: Vec<DateTime<Tz>>,
+    early_close_vec: Vec<DateTime<Tz>>,
+) -> Vec<(i64, i64)> {
     let mut current_date = start_date;
 
     let mut open_ranges = vec![];
@@ -328,4 +356,18 @@ pub fn open_ranges_2025() -> Vec<(i64, i64)> {
         current_date += Duration::days(1);
     }
     open_ranges
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_open_ranges_2022() {
+        let open_ranges = open_ranges_2022();
+        assert_eq!(open_ranges.len(), 251);
+        assert_eq!(open_ranges[0], (1641220200000, 1641243600000));
+        assert_eq!(open_ranges[246], (1671805800000, 1671829200000));
+        assert_eq!(open_ranges[250], (1672410600000, 1672434000000));
+    }
 }

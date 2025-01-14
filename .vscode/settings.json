@@ -1,6 +1,3 @@
 {
-    "rust-analyzer.cargo.features": [
-        "2024",
-        "2025"
-    ]
+    "rust-analyzer.cargo.features": []
 }
