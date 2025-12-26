@@ -4,7 +4,7 @@ UMO (US Market Open) is a Rust library that provides functionality to list all o
 
 ## Features
 
-- List all open time ranges for the US stock market from 2016 to 2025.
+- List all open time ranges for the US stock market from 2016 to 2026.
 - Check the current or next open range by a specific timestamp.
 
 ## Usage
@@ -13,7 +13,7 @@ Add the following to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-umo = "0.2.0"
+umo = "0.2.1"
 ```
 
 Or `cargo add umo`

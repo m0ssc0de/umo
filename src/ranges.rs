@@ -18,6 +18,7 @@ pub fn get_open_ranges() -> Vec<(i64, i64)> {
     open_ranges.append(&mut open_ranges_2023());
     open_ranges.append(&mut open_ranges_2024());
     open_ranges.append(&mut open_ranges_2025());
+    open_ranges.append(&mut open_ranges_2026());
 
     open_ranges
 }
@@ -284,6 +285,46 @@ pub fn open_ranges_2025() -> Vec<(i64, i64)> {
     open_ranges(start_date, end_date, closed_vec, early_close_vec)
 }
 
+pub fn open_ranges_2026() -> Vec<(i64, i64)> {
+    // 2026
+    // | Holiday           | Date                   | Market Status |
+    // |-------------------|------------------------|---------------|
+    // | New Year's Day    | Thursday, January 1    | Closed        |
+    // | MLK, Jr. Day      | Monday, January 19     | Closed        |
+    // | Presidents Day    | Monday, February 16    | Closed        |
+    // | Good Friday       | Friday, April 3        | Closed        |
+    // | Memorial Day      | Monday, May 25         | Closed        |
+    // | Juneteenth        | Friday, June 19        | Closed        |
+    // | Independence Day  | Friday, July 3         | Closed        |
+    // | Labor Day         | Monday, September 7    | Closed        |
+    // | Thanksgiving Day  | Thursday, November 26  | Closed        |
+    // | Early Close       | Friday, November 27    | 1:00 p.m.     |
+    // | Early Close       | Thursday, December 24  | 1:00 p.m.     |
+    // | Christmas Day     | Friday, December 25    | Closed        |
+
+    let closed_vec = vec![
+        Eastern.with_ymd_and_hms(2026, 1, 1, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2026, 1, 19, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2026, 2, 16, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2026, 4, 3, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2026, 5, 25, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2026, 6, 19, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2026, 7, 3, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2026, 9, 7, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2026, 11, 26, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2026, 12, 25, 0, 0, 0).unwrap(),
+    ];
+
+    let early_close_vec = vec![
+        Eastern.with_ymd_and_hms(2026, 11, 27, 0, 0, 0).unwrap(),
+        Eastern.with_ymd_and_hms(2026, 12, 24, 0, 0, 0).unwrap(),
+    ];
+
+    let start_date = Eastern.with_ymd_and_hms(2026, 1, 1, 0, 0, 0).unwrap();
+    let end_date = Eastern.with_ymd_and_hms(2026, 12, 31, 0, 0, 0).unwrap();
+    open_ranges(start_date, end_date, closed_vec, early_close_vec)
+}
+
 fn open_ranges(
     start_date: DateTime<Tz>,
     end_date: DateTime<Tz>,
@@ -369,5 +410,14 @@ mod tests {
         assert_eq!(open_ranges[0], (1641220200000, 1641243600000));
         assert_eq!(open_ranges[246], (1671805800000, 1671829200000));
         assert_eq!(open_ranges[250], (1672410600000, 1672434000000));
+    }
+
+    #[test]
+    fn test_open_ranges_2026() {
+        let open_ranges = open_ranges_2026();
+        assert_eq!(open_ranges.len(), 251);
+        assert_eq!(open_ranges[0], (1767364200000, 1767387600000));
+        assert_eq!(open_ranges[246], (1798122600000, 1798135200000));
+        assert_eq!(open_ranges[250], (1798727400000, 1798750800000));
     }
 }

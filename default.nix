@@ -25,6 +25,9 @@ pkgs.mkShell {
     cmake
   ]);
   RUST_BACKTRACE = 1;
+  shellHook = ''
+  unset TEMP TMP TEMPDIR TMPDIR
+  '';
 }
 
 
